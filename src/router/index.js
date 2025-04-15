@@ -12,11 +12,6 @@ const router = createRouter({
       component: homeComponent,
     },
     {
-      path: '/home',
-      name: 'home',
-      component: homeComponent,
-    },
-    {
       path: '/watchList',
       name: 'watchList',
       component: watchListComponent
