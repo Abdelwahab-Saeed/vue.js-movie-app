@@ -8,9 +8,11 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+const app = createApp(App);
+const pinia = createPinia();
 
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
-import {} from "bootstrap/dist/js/bootstrap.min.js";
+
 app.mount('#app')
+import {} from "bootstrap/dist/js/bootstrap.min.js";
