@@ -20,7 +20,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useWatchlistStore } from '@/stores/watchliststore'
+import { useWatchlistStore } from '@/stores/watchlistStore'
 
 const films = ref([
   {
