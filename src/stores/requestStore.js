@@ -9,9 +9,12 @@ export const useRequestStore = defineStore('request', () => {
   const apiUrl = import.meta.env.VITE_API_URL
 
   // State (use refs)
+  const page = ref(1);
   const allMovies = ref([]);
   const movieData = ref({}); // [SENU]
+  const totalPages = ref(0);
   const searchedMovies = ref([]);
+  
 
   // Actions
   const fetchAllMovies = async (currPage = page, category = "now_playing") => {
