@@ -1,5 +1,6 @@
 <template>
   <main class="container-fluid">
+    <search-form></search-form>
     <h1 class="text-center">Popular Films</h1>
     <div class="row col-12">
       <cardComponent v-for="film in films" :key="film.id" class="film-card" :film="film"/>
@@ -32,6 +33,7 @@ import { onMounted, ref, computed } from 'vue'
 import { useWatchlistStore } from '@/stores/watchlistStore'
 import cardComponent from './cardComponent.vue'
 import { useRequestStore } from '@/stores/requestStore'
+import SearchForm from './Search/SearchForm.vue'
 
 const watchlistStore = useWatchlistStore();
 const requestStore = useRequestStore();

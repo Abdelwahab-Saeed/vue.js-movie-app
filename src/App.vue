@@ -3,13 +3,15 @@ import { RouterLink, RouterView } from 'vue-router';
 import { useWatchlistStore } from './stores/watchlistStore'
 import { storeToRefs } from 'pinia'
 import { computed, onMounted } from 'vue'
-
+import searchForm from './components/Search/SearchForm.vue';
 const watchlistStore = useWatchlistStore()
 const { watchlist } = storeToRefs(watchlistStore)
 
 const watchlistCount = computed(() => {
   return watchlist.value.length
 })
+
+
 
 onMounted(() => {
   console.log('Initial watchlist:', watchlist.value)
@@ -27,6 +29,7 @@ onMounted(() => {
         </router-link>
       </div>
     </nav>
+    
     <router-view></router-view>
   </div>
 </template>
