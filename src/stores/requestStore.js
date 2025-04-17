@@ -1,12 +1,20 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+
 // Option 1: Using the setup syntax (recommended)
 export const useRequestStore = defineStore('request', () => {
+  
+  // env variables
+  const apiKey = import.meta.env.VITE_API_KEY
+  const apiUrl = import.meta.env.VITE_API_URL
+
   // State (use refs)
-  const allMovies = ref([])
-  const searchedMovies = ref([])
   const page = ref(1);
+  const allMovies = ref([]);
+  const movieData = ref({}); // [SENU]
   const totalPages = ref(0);
+  const searchedMovies = ref([]);
+  
 
   // Actions
   const fetchAllMovies = async (currPage = page, category = "now_playing") => {
@@ -17,8 +25,9 @@ export const useRequestStore = defineStore('request', () => {
       totalPages.value = data.total_pages
     } catch (error) {
       console.error('Error fetching movies:', error)
-    }
+    } 
   }
+  
 
   const fetchSearchedMovies = async (query, currPage = page) => {
     try {
@@ -31,12 +40,36 @@ export const useRequestStore = defineStore('request', () => {
     }
   }
 
+  const fetchMovieDetails = async (id) => {
+    try {
+      const url = `${apiUrl}movie/${id}?api_key=${apiKey}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      movieData.value = data;
+    } catch (err) { console.error("Error Fetching Movie Detail. Check internet.", err);}
+  };
+
+
+  // [SENU] get recommende movies based on the chosed movie
+  const fetchRecommndedMovieList = async(movieId)=>{
+    const url = `${apiUrl}movie/${movieId}/recommendations?api_key=${apiKey}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("recomendation data = ", data);
+  }
+    
+  
+  
+
   return {
     allMovies,
+    movieData, //[SENU]
     searchedMovies,
     page,
     totalPages,
     fetchAllMovies,
-    fetchSearchedMovies
+    fetchMovieDetails, // [SENU]
+    fetchSearchedMovies,
+    fetchRecommndedMovieList // [SENU]
   }
 })

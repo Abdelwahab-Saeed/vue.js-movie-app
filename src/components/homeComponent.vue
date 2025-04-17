@@ -1,5 +1,11 @@
 <template>
-  <main class="container-fluid">
+  <main class="container">
+    <section class="m-4 row col-12 p-5 greet-section">
+      <h1 class="pb-3">Welcome to our movie app</h1>
+      <h5 class="pb-3">Millions of movies, TV shows and people to discover. Explore now.</h5>
+      <search-form></search-form>
+    </section>  
+    
     <h1 class="text-center">Popular Films</h1>
     <div class="row col-12">
       <cardComponent v-for="film in films" :key="film.id" class="film-card" :film="film"/>
@@ -32,6 +38,7 @@ import { onMounted, ref, computed } from 'vue'
 import { useWatchlistStore } from '@/stores/watchlistStore'
 import cardComponent from './cardComponent.vue'
 import { useRequestStore } from '@/stores/requestStore'
+import SearchForm from './Search/SearchForm.vue'
 
 const watchlistStore = useWatchlistStore();
 const requestStore = useRequestStore();
@@ -94,6 +101,9 @@ const isInWatchlist = (id) => {
 </script>
 
 <style scoped>
+.greet-section {
+  background-color: rgb(241, 237, 237);
+}
 .pagination .page-item.active .page-link {
   background-color: #007bff;
   border-color: #007bff;

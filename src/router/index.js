@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import homeComponent from '@/components/homeComponent.vue';
 import watchListComponent from '@/components/watchListComponent.vue';
-import SearchComponent from '@/components/SearchComponent.vue';
+import SearchComponent from '@/components/Search/SearchComponent.vue';
 import movieDetailsComponent from '@/components/movieDetails/movieDetailsComponent.vue';
+import Test from '@/components/test.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -26,6 +27,11 @@ const router = createRouter({
       name: 'movieDetails',
       component: movieDetailsComponent
     },
+    {
+      path: '/test',
+      name: 'testing',
+      component: Test
+    }
   ],
 })
 
