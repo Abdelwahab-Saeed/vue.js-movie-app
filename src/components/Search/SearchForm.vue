@@ -1,7 +1,7 @@
 <template>
   <form class="d-flex" role="search" @submit.prevent="submitSearch">
     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="inputValue">
-    <router-link :to="{ path: '/search', query: { query: inputValue }}" class="btn btn-outline-success">
+    <router-link :to="{ path: '/search', query: { query: inputValue }}" class="btn submit-btn">
         Search
     </router-link>
 </form>
@@ -18,6 +18,9 @@
     }
 </script>
 
-<style>
-
+<style scoped>
+    .submit-btn {
+        background-color:  #FFE353;
+        color: black;
+    }
 </style>

@@ -25,7 +25,7 @@ export const useRequestStore = defineStore('request', () => {
       totalPages.value = data.total_pages
     } catch (error) {
       console.error('Error fetching movies:', error)
-    }
+    } 
   }
   
 
