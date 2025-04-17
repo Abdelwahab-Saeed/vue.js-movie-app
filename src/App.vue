@@ -16,23 +16,15 @@ onMounted(() => {
 })
 </script>
 
+
 <template>
-  <div class="data">
-    <nav style="padding: 20px; background-color:rgb(255, 229, 248); margin:0;">
-      <router-link to="/" style="float: left;">Home</router-link>
-      <div style="float: right;">
-        <router-link to="/watchList" style="margin-right: 20px; position: relative;">
-          Watchlist
-          <span v-if="watchlistCount > 0" class="watchlist-counter">{{ watchlistCount }}</span>
-        </router-link>
-      </div>
-    </nav>
-    <router-view></router-view>
-  </div>
+
 </template>
 
 <style scoped>
-nav {
+
+</style>
+/* nav {
   padding: 1rem;
   overflow: hidden; 
 }
@@ -69,5 +61,17 @@ nav a:hover {
   justify-content: center;
   font-size: 12px;
   font-weight: bold;
-}
-</style>
+} */
+
+<!--  <div class="data">
+    <nav style="padding: 20px; background-color:rgb(255, 229, 248); margin:0;">
+      <router-link to="/" style="float: left;">Home</router-link>
+      <div style="float: right;">
+        <router-link to="/watchList" style="margin-right: 20px; position: relative;">
+          Watchlist
+          <span v-if="watchlistCount > 0" class="watchlist-counter">{{ watchlistCount }}</span>
+        </router-link>
+      </div>
+    </nav>
+    <router-view></router-view>
+  </div>-->
