@@ -48,6 +48,15 @@ export const useRequestStore = defineStore('request', () => {
       movieData.value = data;
     } catch (err) { console.error("Error Fetching Movie Detail. Check internet.", err);}
   };
+
+
+  // [SENU] get recommende movies based on the chosed movie
+  const fetchRecommndedMovieList = async(movieId)=>{
+    const url = `${apiUrl}movie/${movieId}/recommendations?api_key=${apiKey}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("recomendation data = ", data);
+  }
     
   
   
@@ -60,6 +69,7 @@ export const useRequestStore = defineStore('request', () => {
     totalPages,
     fetchAllMovies,
     fetchMovieDetails, // [SENU]
-    fetchSearchedMovies
+    fetchSearchedMovies,
+    fetchRecommndedMovieList // [SENU]
   }
 })
