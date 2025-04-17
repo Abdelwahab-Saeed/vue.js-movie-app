@@ -1,8 +1,10 @@
 <template>  
     <div class="card film-card col-xs-12 col-sm-6 col-md-2 offset-1 my-3" >
-      <div class="card-img-container">
-        <img :src="`https://image.tmdb.org/t/p/w500/${film.poster_path}`" :alt="film.title"  class="card-img-top" />
-      </div>
+      <router-link :to="`/movie/${film.id}`">
+          <div class="card-img-container" >
+            <img :src="`https://image.tmdb.org/t/p/w500/${film.poster_path}`" :alt="film.title"  class="card-img-top" />
+          </div>
+      </router-link>
       <div class="card-body">
         <h3 class="card-title">{{ film.title }}</h3>
         <p class="card-text">{{ film.release_date }}</p>
@@ -14,10 +16,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, } from 'vue'
 import { useWatchlistStore } from '@/stores/watchlistStore'
-
-
+import { RouterLink } from 'vue-router'
 const props = defineProps({
   film: {
     type: Object,
@@ -58,6 +59,7 @@ const isInWatchlist = (id) => {
 .film-card .card-img-container {
   overflow: hidden;
   max-height: 300px;
+  cursor: pointer;
 }
 
 .film-card img {
