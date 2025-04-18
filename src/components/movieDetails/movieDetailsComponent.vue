@@ -63,7 +63,7 @@
 
 
     <!-- recommendation page -->
-    <RecommendationComponent/>
+    <RecommendationComponent :movieId="movieId"/>
 
   </div>
 </template>
