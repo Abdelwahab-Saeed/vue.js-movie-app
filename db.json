@@ -1,24 +1,10 @@
 {
   "users": [
     {
-      "id": "9ef7",
-      "name": "amira mohammed",
-      "email": "amira123@gmail.com",
+      "id": "7754",
+      "name": "ahmed",
+      "email": "ahmed@gmail.com",
       "password": "1234567",
-      "watchlist": []
-    },
-    {
-      "id": "7ea5",
-      "name": "mai",
-      "email": "mai@gmail.com",
-      "password": "123456",
-      "watchlist": []
-    },
-    {
-      "id": "e8d8",
-      "name": "amira",
-      "email": "amira@gmail.com",
-      "password": "123456",
       "watchlist": []
     }
   ]

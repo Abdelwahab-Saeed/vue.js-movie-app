@@ -65,6 +65,9 @@
     <!-- recommendation page -->
     <RecommendationComponent :movieId="movieId"/>
 
+    <!-- comment section -->
+    <commentSectionComponent/>
+
   </div>
 </template>
 
@@ -73,6 +76,7 @@
   import { useRequestStore } from './../../stores/requestStore.js';
   import { useRoute } from 'vue-router';
   import RecommendationComponent from './recommendationComponent.vue';
+  import commentSectionComponent from './commentSectionComponent.vue';
 
   const store = useRequestStore();
   const route = useRoute();
