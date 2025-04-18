@@ -8,6 +8,20 @@
               <h3>Login</h3>
             </div>
             <div class="card-body">
+                <div
+                v-if="alert.message && alert.type === 'success'"
+                class="alert alert-success"
+                role="alert"
+              >
+                {{ alert.message }}
+              </div>
+              <div
+                v-if="alert.message && alert.type === 'error'"
+                class="alert alert-danger"
+                role="alert"
+              >
+                {{ alert.message }}
+              </div>
               <form @submit.prevent="handleLogin">
              
                 <div class="mb-3">
@@ -53,32 +67,28 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
 const email = ref('')
 const password = ref('')
 const errors = ref({})
+const alert = ref({ message: '', type: '' }) 
 
-const handleLogin = () => {
+const handleLogin = async () => {
   errors.value = {}
+  alert.value = { message: '', type: '' }
 
-  if (!email.value) {
-    errors.value.email = 'Email is required'
-  }
-
-  if (!password.value) {
-    errors.value.password = 'Password is required'
-  }
+  if (!email.value) errors.value.email = 'Email is required'
+  if (!password.value) errors.value.password = 'Password is required'
 
   if (Object.keys(errors.value).length === 0) {
-    const users = JSON.parse(localStorage.getItem('users') || '[]')
-    const user = users.find(u => u.email === email.value && u.password === password.value)
+    const res = await fetch(`http://localhost:3000/users?email=${email.value}&password=${password.value}`)
+    const users = await res.json()
 
-    if (user) {
-      alert('Login successful!')
-      
-      router.push('/watchList')
+    if (users.length > 0) {
+      localStorage.setItem('loggedInUserId', users[0].id)
+      alert.value = { message: 'Login successful!', type: 'success' }
+      setTimeout(() => router.push('/watchlist'), 1000)
     } else {
-      errors.value.email = 'Invalid email or password'
+      alert.value = { message: 'Invalid email or password.', type: 'error' }
     }
   }
 }

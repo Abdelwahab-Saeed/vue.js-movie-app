@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <div class="container mt-5">
+    <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card">
@@ -8,8 +7,20 @@
             <h3>Register</h3>
           </div>
           <div class="card-body">
+          
+            <div
+              v-if="showAlert"
+              class="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              {{ successMessage }}
+              <button
+                type="button"
+                class="btn-close"
+                @click="showAlert = false"
+              ></button>
+            </div>
             <form @submit.prevent="submitForm" novalidate>
-             
               <div class="mb-3">
                 <label class="form-label">Name</label>
                 <input
@@ -21,7 +32,6 @@
                 <div class="invalid-feedback">{{ errors.name }}</div>
               </div>
 
-              <!-- Email -->
               <div class="mb-3">
                 <label class="form-label">Email</label>
                 <input
@@ -33,7 +43,6 @@
                 <div class="invalid-feedback">{{ errors.email }}</div>
               </div>
 
-             
               <div class="mb-3">
                 <label class="form-label">Password</label>
                 <input
@@ -44,6 +53,7 @@
                 />
                 <div class="invalid-feedback">{{ errors.password }}</div>
               </div>
+
               <div class="mb-3">
                 <label class="form-label">Repeat Password</label>
                 <input
@@ -55,20 +65,26 @@
                 <div class="invalid-feedback">{{ errors.repeatPassword }}</div>
               </div>
 
-              <button type="submit" class="btn w-100">Register</button>
+              <button type="submit" class="btn w-100">
+                Register
+              </button>
             </form>
+
+            <!-- Link to Login -->
             <div class="text-center mt-3">
-  <router-link to="/login" class="text-dark text-decoration-none">
-    Already have an account?
-    <span class="ms-2 btn">sign in</span>
-  </router-link>
-</div>
+              <router-link
+                to="/login"
+                class="text-dark text-decoration-none"
+              >
+                Already have an account?
+                <span class="ms-2 btn  p-0">Sign in</span>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-    </div>
   </template>
   
   <script setup>
@@ -79,11 +95,14 @@ const email = ref('')
 const password = ref('')
 const repeatPassword = ref('')
 const errors = ref({})
+const successMessage = ref('')
+const showAlert = ref(false)
 
-const submitForm = () => {
+const submitForm = async () => {
   errors.value = {}
+  showAlert.value = false
+  successMessage.value = ''
 
- 
   if (!name.value) errors.value.name = 'Name is required'
   if (!email.value) {
     errors.value.email = 'Email is required'
@@ -101,24 +120,34 @@ const submitForm = () => {
     errors.value.repeatPassword = 'Passwords do not match'
   }
 
-  
   if (Object.keys(errors.value).length === 0) {
-    const user = {
-      name: name.value,
-      email: email.value,
-      password: password.value
+    
+    const res = await fetch(`http://localhost:3000/users?email=${email.value}`)
+    const existing = await res.json()
+    if (existing.length > 0) {
+      errors.value.email = 'Email already exists'
+      return
     }
 
-    const users = JSON.parse(localStorage.getItem('users') || '[]')
-    users.push(user)
-    localStorage.setItem('users', JSON.stringify(users))
+    const response = await fetch('http://localhost:3000/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        password: password.value,
+        watchlist: [] 
+      })
+    })
 
-    alert('Registration successful!')
-
-    name.value = ''
-    email.value = ''
-    password.value = ''
-    repeatPassword.value = ''
+    if (response.ok) {
+      successMessage.value = 'Registration successful!'
+      showAlert.value = true
+      name.value = ''
+      email.value = ''
+      password.value = ''
+      repeatPassword.value = ''
+    }
   }
 }
   </script>
