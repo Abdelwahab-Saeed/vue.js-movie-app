@@ -11,6 +11,7 @@ export const useRequestStore = defineStore('request', () => {
   // State (use refs)
   const page = ref(1);
   const allMovies = ref([]);
+  const recommendationList =ref([]);
   const movieData = ref({}); // [SENU]
   const totalPages = ref(0);
   const searchedMovies = ref([]);
@@ -40,6 +41,7 @@ export const useRequestStore = defineStore('request', () => {
     }
   }
 
+  // [SENU]: fetch movie details
   const fetchMovieDetails = async (id) => {
     try {
       const url = `${apiUrl}movie/${id}?api_key=${apiKey}`;
@@ -50,12 +52,13 @@ export const useRequestStore = defineStore('request', () => {
   };
 
 
-  // [SENU] get recommende movies based on the chosed movie
+  // [SENU] get recommended movies based on the chosed movie
   const fetchRecommndedMovieList = async(movieId)=>{
     const url = `${apiUrl}movie/${movieId}/recommendations?api_key=${apiKey}`;
     const response = await fetch(url);
     const data = await response.json();
-    console.log("recomendation data = ", data);
+    recommendationList.value = data.results;
+    console.log("recomendation data = ", recommendationList);
   }
     
   
@@ -65,6 +68,7 @@ export const useRequestStore = defineStore('request', () => {
     allMovies,
     movieData, //[SENU]
     searchedMovies,
+    recommendationList,
     page,
     totalPages,
     fetchAllMovies,
