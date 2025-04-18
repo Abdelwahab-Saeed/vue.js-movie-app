@@ -69,24 +69,41 @@
 </template>
 
 <script setup>
-  import { onMounted } from 'vue';
+  import { onMounted, watch } from 'vue';
   import { useRequestStore } from './../../stores/requestStore.js';
   import { useRoute } from 'vue-router';
   import RecommendationComponent from './recommendationComponent.vue';
 
   const store = useRequestStore();
-
   const route = useRoute();
   const movieId = route.params.id;
   console.log("movie id = ", movieId);
-  
-  onMounted(async () => {
-      await store.fetchMovieDetails(movieId);
-});
 
-// Utility function to help with commas
-function isLast(array, item) {
-  return array.indexOf(item) === array.length - 1;
-}
+  //=============
+  const loadMovieData = async (id) => {
+    await store.fetchMovieDetails(id)
+    await store.fetchRecommndedMovieList(id)
+  }
+
+  // load the movie data
+  onMounted(() => {loadMovieData(route.params.id)})
+
+  // watch route changes: to change the conten
+  watch(() => route.params.id, (newId, oldId) => { 
+    
+    if (newId !== oldId) {
+
+      loadMovieData(newId)                             // load on change
+      window.scrollTo({ top: 0, behavior: 'smooth' }); // to go to top
+
+    } })
+
+
+
+  // Utility function to help with commas
+  function isLast(array, item) {
+    return array.indexOf(item) === array.length - 1;
+  }
+
 </script>
 
