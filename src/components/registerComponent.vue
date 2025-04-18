@@ -58,7 +58,7 @@
               <button type="submit" class="btn w-100">Register</button>
             </form>
             <div class="text-center mt-3">
-  <router-link to="/" class="text-dark text-decoration-none">
+  <router-link to="/login" class="text-dark text-decoration-none">
     Already have an account?
     <span class="ms-2 btn">sign in</span>
   </router-link>

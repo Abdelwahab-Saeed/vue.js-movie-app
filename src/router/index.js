@@ -5,6 +5,7 @@ import SearchComponent from '@/components/Search/SearchComponent.vue';
 import movieDetailsComponent from '@/components/movieDetails/movieDetailsComponent.vue';
 import Test from '@/components/test.vue';
 import RegisterComponent from '@/components/registerComponent.vue';
+import LoginComponent from '@/components/loginComponent.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -37,6 +38,11 @@ const router = createRouter({
       path:'/register',
       name:'register',
       component:RegisterComponent
+    },
+    {
+      path:'/login',
+      name:'login',
+      component:LoginComponent
     }
   ],
 })
