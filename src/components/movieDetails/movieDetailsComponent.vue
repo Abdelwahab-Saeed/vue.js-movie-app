@@ -65,24 +65,38 @@
     <!-- recommendation page -->
     <RecommendationComponent :movieId="movieId"/>
 
+    <!-- comment section -->
+    <commentSectionComponent :movieId="movieId" :movieComments="movieComments" @comment-added="loadMovieComments"/>
+
   </div>
 </template>
 
 <script setup>
-  import { onMounted, watch } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
   import { useRequestStore } from './../../stores/requestStore.js';
   import { useRoute } from 'vue-router';
   import RecommendationComponent from './recommendationComponent.vue';
+  import commentSectionComponent from './commentSectionComponent.vue';
+  import CommentService from './CRUD_comment.js';
 
   const store = useRequestStore();
   const route = useRoute();
-  const movieId = route.params.id;
-  console.log("movie id = ", movieId);
+  let movieId = route.params.id;
+  const movieComments = ref([]); //[CHANGE]
+
+  // load movie comments [CHANGE]
+  const loadMovieComments = async()=>{
+    console.log("the movie id in load commments  = ", movieId);
+    const result = await CommentService.getCommentsByMovie(movieId);
+    movieComments.value = result || [];
+  }
 
   //=============
   const loadMovieData = async (id) => {
-    await store.fetchMovieDetails(id)
-    await store.fetchRecommndedMovieList(id)
+    await store.fetchMovieDetails(id);
+    await store.fetchRecommndedMovieList(id);
+    await loadMovieComments();
+    
   }
 
   // load the movie data
@@ -90,12 +104,10 @@
 
   // watch route changes: to change the conten
   watch(() => route.params.id, (newId, oldId) => { 
-    
     if (newId !== oldId) {
-
       loadMovieData(newId)                             // load on change
       window.scrollTo({ top: 0, behavior: 'smooth' }); // to go to top
-
+      movieId = newId;
     } })
 
 

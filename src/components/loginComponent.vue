@@ -76,14 +76,19 @@ const handleLogin = async () => {
   errors.value = {}
   alert.value = { message: '', type: '' }
 
+  // check empty email and password
   if (!email.value) errors.value.email = 'Email is required'
   if (!password.value) errors.value.password = 'Password is required'
 
   if (Object.keys(errors.value).length === 0) {
+
+    // get user data
     const res = await fetch(`http://localhost:3000/users?email=${email.value}&password=${password.value}`)
     const users = await res.json()
 
     if (users.length > 0) {
+
+      // set user id in the local storage
       localStorage.setItem('loggedInUserId', users[0].id)
       alert.value = { message: 'Login successful!', type: 'success' }
       setTimeout(() => router.push('/'), 1000)

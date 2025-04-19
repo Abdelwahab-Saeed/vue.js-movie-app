@@ -1,15 +1,22 @@
 <template>
+  <div v-if="loading" class="loading-overlay">
+    <div class="spinner-border text-light" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
   <main class="container-fluid watchlist-container">
     <div class="watchlist-header">
       <h1 class="watchlist-title">My Watchlist</h1>
     </div>
 
     <div v-if="watchlist.length > 0" class="row watchlist-grid">
-      <cardComponent 
-        v-for="film in watchlist" 
-        :key="film.id" 
-        class="film-card" 
+      <CardComponent
+        v-for="film in watchlist"
+        :key="film.id"
+        class="film-card"
         :film="film"
+        @remove-from-watchlist="removeFromWatchlist"
       />
     </div>
 
@@ -20,7 +27,7 @@
           ♡
         </div>
       </div>
-      
+
       <div class="empty-content">
         <h3>Your Watchlist Is Empty</h3>
         <p>Find your next favorite movie and add it here</p>
@@ -36,15 +43,41 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useWatchlistStore } from '@/stores/watchlistStore'
-import cardComponent from './cardComponent.vue'
+import cardComponent from '@/components/cardComponent.vue' // ✅ Import the actual card for watchlist
 
+const loading = ref(false)
 const watchlistStore = useWatchlistStore()
 const watchlist = computed(() => watchlistStore.watchlist)
+
+onMounted(async () => {
+  loading.value = true
+  try {
+    await watchlistStore.fetchUserWatchlist()
+  } finally {
+    loading.value = false
+  }
+})
+
+const removeFromWatchlist = (id) => {
+  watchlistStore.removeFromWatchlist(id)
+}
 </script>
 
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+
 .watchlist-container {
   padding: 2rem 1.5rem;
   min-height: 70vh;
@@ -144,11 +177,11 @@ const watchlist = computed(() => watchlistStore.watchlist)
   .watchlist-title {
     font-size: 2rem;
   }
-  
+
   .empty-state {
     padding: 2rem 1rem;
   }
-  
+
   .heart-icon {
     font-size: 2.5rem;
   }
