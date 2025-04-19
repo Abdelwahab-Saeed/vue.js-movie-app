@@ -1,6 +1,6 @@
 <template>
   <main class="container">
-    <section class="m-4 row col-12 p-5 greet-section">
+    <section class="row col-12 py-5 px-3 my-4 greet-section">
       <h1 class="pb-3">Welcome to our movie app</h1>
       <h5 class="pb-3">Millions of movies, TV shows and people to discover. Explore now.</h5>
       <search-form></search-form>

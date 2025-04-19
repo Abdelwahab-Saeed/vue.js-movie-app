@@ -1,45 +1,44 @@
 <template>
-  <div v-if="loading" class="loading-overlay">
-    <div class="spinner-border text-light" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </div>
-
-  <main class="container-fluid watchlist-container">
-    <div class="watchlist-header">
-      <h1 class="watchlist-title">My Watchlist</h1>
+  <div>
+    <div v-if="loading" class="loading-overlay">
+      <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
 
-    <div v-if="watchlist.length > 0" class="row watchlist-grid">
-      <CardComponent
-        v-for="film in watchlist"
-        :key="film.id"
-        class="film-card"
-        :film="film"
-        @remove-from-watchlist="removeFromWatchlist"
-      />
-    </div>
+    <main class="container-fluid watchlist-container">
+      <div class="watchlist-header">
+        <h1 class="watchlist-title">My Watchlist</h1>
+      </div>
 
-    <div v-else class="empty-state">
-      <div class="heart-container">
-        <div class="heart-icon">
-          <div class="heart-line"></div>
-          ♡
+      <div v-if="watchlist.length > 0" class="row watchlist-grid">
+        <CardComponent v-for="film in watchlist" :key="film.id" class="film-card" :film="film"
+          @remove-from-watchlist="removeFromWatchlist" />
+      </div>
+
+      <div v-else class="empty-state">
+        <div class="heart-container">
+          <div class="heart-icon">
+            <div class="heart-line"></div>
+            ♡
+          </div>
+        </div>
+
+        <div class="empty-content">
+          <h3>Your Watchlist Is Empty</h3>
+          <p>Find your next favorite movie and add it here</p>
+          <router-link to="/" class="discover-button">
+            Explore Movies
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </router-link>
         </div>
       </div>
+    </main>
+  </div>
 
-      <div class="empty-content">
-        <h3>Your Watchlist Is Empty</h3>
-        <p>Find your next favorite movie and add it here</p>
-        <router-link to="/" class="discover-button">
-          Explore Movies
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </router-link>
-      </div>
-    </div>
-  </main>
 </template>
 
 <script setup>
