@@ -5,14 +5,27 @@
       "name": "ahmed",
       "email": "ahmed@gmail.com",
       "password": "1234567",
-      "watchlist": []
+      "watchlist": [
+        822119,
+        1353117,
+        1244944,
+        1233413,
+        1229730,
+        1125899,
+        1020414,
+        1261050
+      ]
     },
     {
-      "id": "d7bd",
-      "name": "ali",
-      "email": "ali@gmail.com",
-      "password": "123456",
-      "watchlist": []
+      "id": "3ed3",
+      "name": "abc2",
+      "email": "abc2@gmail.com",
+      "password": "abc123456",
+      "watchlist": [
+        1197306,
+        324544,
+        950387
+      ]
     }
   ],
   "comments": [
@@ -77,28 +90,10 @@
       "text": "hi in my new comment"
     },
     {
-      "id": "63f5",
-      "movieId": "1197306",
+      "id": "352f",
+      "movieId": "1081012",
       "userId": "7754",
-      "text": "hello there"
-    },
-    {
-      "id": "0892",
-      "movieId": "1197306",
-      "userId": "d7bd",
-      "text": "hello am ali and this is my comment"
-    },
-    {
-      "id": "fac9",
-      "movieId": "1197306",
-      "userId": "d7bd",
-      "text": "hi Iam ali again"
-    },
-    {
-      "id": "2eab",
-      "movieId": "1197306",
-      "userId": "d7bd",
-      "text": "my name is ali"
+      "text": "good"
     }
   ]
 }
