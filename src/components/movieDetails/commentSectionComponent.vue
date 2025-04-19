@@ -11,6 +11,10 @@
 
                 <!-- for textarea, and submit button -->
                  <div class="col p-0 m-0">
+                    
+                    <!-- user id -->
+                    <div class="row p-0 m-0"></div>
+
                     <!-- for textarea -->
                     <div class="row p-0 m-0">
                         <textarea
@@ -32,18 +36,34 @@
 
                  </div>
 
-                 <div v-if="movieComments.length" class="container border border-dark p-0 m-0">
-                    <div v-for="c in movieComments" class="container border border-primary d-flex flex-column">
-                        <div class="d-flex p-0 m-0">
-                            <img src="./../../../public/image.png" alt="" width="50px" height="50px" class="me-2">
-                            <textarea
-                            style="overflow:hidden; resize: none; width: 100%; font-size: large; height: 50px;"
-                            oninput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px';"
-                            placeholder="tell us your watch experience...."
-                            class="form-control w-100 m-0"
-                            :value='c.text'
-                            disabled
-                            ></textarea>
+                 <div v-if="movieComments.length" class="container p-0 m-0">
+                    <div v-for="c in movieComments" class="container d-flex flex-column">
+                        <div class="d-flex p-0 m-0  justify-content-center align-items-center mb-4">
+
+                            
+                            <!-- user image -->
+                            <img src="./../../../public/image.png" alt="" width="65px" height="65px" class="me-2">
+
+                            
+                            <div class="col">
+
+                                <!-- userId -->
+                                <span>@{{ userMap[c.userId] || 'Loading...' }}</span>
+
+
+                                <!-- textarea -->
+                                <textarea
+                                style="overflow:hidden; resize: none; width: 100%; font-size: large; height: 50px;"
+                                oninput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px';"
+                                placeholder="tell us your watch experience...."
+                                class="form-control w-100 m-0"
+                                :value='c.text'
+                                disabled
+                                ></textarea>
+
+                            </div>
+
+
                         </div>
 
                     </div>
@@ -62,14 +82,42 @@
 <script setup>
 
 // IMPORTS
-import {ref, defineEmits, defineProps} from 'vue';
+import {ref, defineEmits, defineProps, onMounted, watch} from 'vue';
 import CommentService from './CRUD_comment';
+
+
+// METHOD: CREATE UPDATE USER MAP(id:name)
+const populateUsernames = async () => {
+
+    // NOTE: Set to be uniqe + convert object to id as element in the list
+    const ids = [...new Set(props.movieComments.map(c => c.userId))];
+
+    // NOTE: Promise.all: runs multiple async operations in parallell, then return
+    const users = await Promise.all(
+        ids.map(async id => {
+
+            // FETCH 
+            const res = await fetch(`http://localhost:3000/users?id=${id}`); 
+            const data = await res.json();
+            return { id, name: data[0].name || "unknown" };
+    }));
+
+    // loop on users => key:id , value: name
+    users.forEach(({ id, name }) => {
+        userMap.value[id] = name;
+    });
+}
 
 // VARIABLES
 const txtComment = ref("");
 const emit = defineEmits(['comment-added']);
 const userId = localStorage.getItem('loggedInUserId');
 const props = defineProps({ movieId: String, movieComments: Array });
+const userMap = ref({});
+
+// ON LOAD + MONITOR COMMENTS
+onMounted(() => {populateUsernames();});
+watch(() => props.movieComments, () => { populateUsernames();});
 
 // METHOD: SUBMIT
 const handleSubmit = async () => {

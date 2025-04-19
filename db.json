@@ -6,6 +6,13 @@
       "email": "ahmed@gmail.com",
       "password": "1234567",
       "watchlist": []
+    },
+    {
+      "id": "d7bd",
+      "name": "ali",
+      "email": "ali@gmail.com",
+      "password": "123456",
+      "watchlist": []
     }
   ],
   "comments": [
@@ -68,6 +75,30 @@
       "movieId": "1160956",
       "userId": "7754",
       "text": "hi in my new comment"
+    },
+    {
+      "id": "63f5",
+      "movieId": "1197306",
+      "userId": "7754",
+      "text": "hello there"
+    },
+    {
+      "id": "0892",
+      "movieId": "1197306",
+      "userId": "d7bd",
+      "text": "hello am ali and this is my comment"
+    },
+    {
+      "id": "fac9",
+      "movieId": "1197306",
+      "userId": "d7bd",
+      "text": "hi Iam ali again"
+    },
+    {
+      "id": "2eab",
+      "movieId": "1197306",
+      "userId": "d7bd",
+      "text": "my name is ali"
     }
   ]
 }
