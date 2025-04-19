@@ -101,8 +101,10 @@
   // IMPORTS
   import { ref, defineEmits, defineProps, onMounted, watch } from 'vue';
   import CommentService from './CRUD_comment';
+import { useRouter } from 'vue-router';
   
   // EMIT & PROPS
+  const router = useRouter(); 
   const emit = defineEmits(['comment-added']);
   const props = defineProps({ movieId: String, movieComments: Array });
   
@@ -123,11 +125,16 @@
   
   // METHOD: Submit New Comment
   const handleSubmit = async () => {
-    if (txtComment.value.trim()) {
-      await CommentService.createComment(props.movieId, userId, txtComment.value.trim());
-      txtComment.value = "";
-      emit('comment-added');
+    let loggedUserId = localStorage.getItem('loggedInUserId');
+    if(loggedUserId){
+      if (txtComment.value.trim()) {
+        await CommentService.createComment(props.movieId, userId, txtComment.value.trim());
+        txtComment.value = "";
+        emit('comment-added');
+      }
     }
+    else{ router.push('/login');}
+
   };
   
   // METHOD: Populate Usernames
