@@ -7,5 +7,67 @@
       "password": "1234567",
       "watchlist": []
     }
+  ],
+  "comments": [
+    {
+      "id": "fb23",
+      "movieId": "1165466",
+      "userId": "7754",
+      "text": "ahmed"
+    },
+    {
+      "id": "ed3c",
+      "movieId": "1165466",
+      "userId": "7754",
+      "text": "hello"
+    },
+    {
+      "id": "70be",
+      "movieId": "1293286",
+      "userId": "7754",
+      "text": "hello guy I happy to write my commen"
+    },
+    {
+      "id": "163f",
+      "movieId": "1293286",
+      "userId": "7754",
+      "text": "hello"
+    },
+    {
+      "id": "1a4a",
+      "movieId": "1293286",
+      "userId": "7754",
+      "text": "hi"
+    },
+    {
+      "id": "845a",
+      "movieId": "822119",
+      "userId": "7754",
+      "text": "hello"
+    },
+    {
+      "id": "29b4",
+      "movieId": "1293286",
+      "userId": "7754",
+      "text": "hiiiiii"
+    },
+    {
+      "id": "5473",
+      "movieId": "1197306",
+      "userId": "7754",
+      "text": "hello"
+    },
+    {
+      "id": "fc1b",
+      "movieId": "1045938",
+      "userId": "7754",
+      "text": "this is my first comment in g20"
+    },
+    {
+      "id": "3e4f",
+      "movieId": "1160956",
+      "userId": "7754",
+      "text": "hi in my new comment"
+    }
   ]
 }
