@@ -26,6 +26,35 @@
         324544,
         950387
       ]
+    },
+    {
+      "id": "e5df",
+      "name": "amira",
+      "email": "amira@gmail.com",
+      "password": "123456",
+      "watchlist": [
+        324544,
+        1197306,
+        950387
+      ]
+    },
+    {
+      "id": "3c3c",
+      "name": "amiramo",
+      "email": "amirft@gmail.com",
+      "password": "123456",
+      "watchlist": [
+        950387,
+        324544,
+        1197306
+      ]
+    },
+    {
+      "id": "ce62",
+      "name": "amiramohammed",
+      "email": "ami@gamil.com",
+      "password": "123456",
+      "watchlist": []
     }
   ],
   "comments": [
