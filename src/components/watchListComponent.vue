@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div v-if="loading" class="loading-overlay">
     <div class="spinner-border text-light" role="status">
       <span class="visually-hidden">Loading...</span>
@@ -40,6 +41,7 @@
       </div>
     </div>
   </main>
+</div>
 </template>
 
 <script setup>
