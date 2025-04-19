@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-5">
+  <div class="container p-5 w-60 border">
     <div v-if="store.movieData && store.movieData.title">
       <!-- Movie Header -->
       <div class="d-flex gap-4 flex-wrap">
@@ -118,4 +118,9 @@
   }
 
 </script>
+
+
+<style>
+.w-60{width: 60%;}
+</style>
 
