@@ -89,6 +89,9 @@
   
   <script setup>
   import { ref } from 'vue'
+  import { useRouter } from 'vue-router' // أضف هذا السطر
+
+const router = useRouter()
 
 const name = ref('')
 const email = ref('')
@@ -148,15 +151,18 @@ const submitForm = async () => {
       password.value = ''
       repeatPassword.value = ''
     }
+    setTimeout(() => {
+    router.push('/login')
+  }, 1000)
   }
 }
   </script>
   
   <style scoped>
   .btn{
-    background-color: rgb(255, 229, 248);
+    background-color: #FFE353;
   }
   .btn:hover{
-    background-color: rgb(255, 165, 231);
+    background-color: #f5e8a6;
   }
   </style>
