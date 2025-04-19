@@ -5,7 +5,27 @@
       "name": "ahmed",
       "email": "ahmed@gmail.com",
       "password": "1234567",
-      "watchlist": []
+      "watchlist": [
+        822119,
+        1353117,
+        1244944,
+        1233413,
+        1229730,
+        1125899,
+        1020414,
+        1261050
+      ]
+    },
+    {
+      "id": "3ed3",
+      "name": "abc2",
+      "email": "abc2@gmail.com",
+      "password": "abc123456",
+      "watchlist": [
+        1197306,
+        324544,
+        950387
+      ]
     }
   ],
   "comments": [
@@ -68,6 +88,12 @@
       "movieId": "1160956",
       "userId": "7754",
       "text": "hi in my new comment"
+    },
+    {
+      "id": "352f",
+      "movieId": "1081012",
+      "userId": "7754",
+      "text": "good"
     }
   ]
 }
