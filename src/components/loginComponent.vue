@@ -91,7 +91,7 @@ const handleLogin = async () => {
       // set user id in the local storage
       localStorage.setItem('loggedInUserId', users[0].id)
       alert.value = { message: 'Login successful!', type: 'success' }
-      setTimeout(() => router.push('/'), 1000);
+      setTimeout(() => window.location.href = '/', 1000);
     } else {
       alert.value = { message: 'Invalid email or password.', type: 'error' }
     }
