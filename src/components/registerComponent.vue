@@ -65,7 +65,7 @@
                 <div class="invalid-feedback">{{ errors.repeatPassword }}</div>
               </div>
 
-              <button type="submit" class="btn w-100">
+              <button type="submit" class="btn w-100" > 
                 Register
               </button>
             </form>
@@ -88,7 +88,8 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue'
+  import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
 
 const name = ref('')
 const email = ref('')
@@ -97,6 +98,8 @@ const repeatPassword = ref('')
 const errors = ref({})
 const successMessage = ref('')
 const showAlert = ref(false)
+
+const router = useRouter()
 
 const submitForm = async () => {
   errors.value = {}
@@ -147,6 +150,10 @@ const submitForm = async () => {
       email.value = ''
       password.value = ''
       repeatPassword.value = ''
+
+      setTimeout(() => {
+        router.push('/login')
+      }, 2000)
     }
   }
 }
