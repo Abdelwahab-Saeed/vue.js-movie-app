@@ -77,7 +77,7 @@
                 class="text-dark text-decoration-none"
               >
                 Already have an account?
-                <span class="ms-2 btn  p-0">Sign in</span>
+                <span class="ms-2 btn  px-3">Sign in</span>
               </router-link>
             </div>
           </div>
@@ -154,9 +154,9 @@ const submitForm = async () => {
   
   <style scoped>
   .btn{
-    background-color: rgb(255, 229, 248);
+    background-color: #FFE353;
   }
   .btn:hover{
-    background-color: rgb(255, 165, 231);
+    background-color: #bea213;
   }
   </style>

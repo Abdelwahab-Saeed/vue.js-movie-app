@@ -91,7 +91,7 @@ const handleLogin = async () => {
       // set user id in the local storage
       localStorage.setItem('loggedInUserId', users[0].id)
       alert.value = { message: 'Login successful!', type: 'success' }
-      setTimeout(() => router.push('/watchlist'), 1000);
+      setTimeout(() => router.push('/'), 1000);
     } else {
       alert.value = { message: 'Invalid email or password.', type: 'error' }
     }
@@ -101,11 +101,11 @@ const handleLogin = async () => {
 
 <style scoped>
 .btn{
-  background-color: rgb(255, 229, 248);
+  background-color: #FFE353;
  
 }
 .btn:hover{
-    background-color: rgb(255, 165, 231);
+    background-color: #d1b527;
 }
 
 </style>

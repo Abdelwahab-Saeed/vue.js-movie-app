@@ -3,15 +3,22 @@
     
     <section class="m-1 row col-12 p-5">
       <search-form></search-form>
+      <div class="alert alert-danger col-12 my-3" role="alert" v-if="errorMessage">
+      {{ errorMessage }}
+    </div>
       <span class="pt-3"><b>Search Results For:</b> {{ searchQuery }}</span>
     </section>
-    <div class="row col-12">
-      <!-- Removed .value from films -->
-      <cardComponent v-for="film in films" :key="film.id" class="film-card" :film="film" />
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      <div class="col" v-for="film in films" :key="film.id">
+        <cardComponent :film="film" @log-first="errorMessage = $event"/>
+      </div>
+      
+      
       <div v-if="films.length === 0" class="col-12 text-center">
         <p>No results found for "{{ searchQuery }}"</p>
       </div>
-      <div id="pagination" class="d-flex justify-content-center my-4" v-if="films.length > 0">
+    </div>
+      <div id="pagination" class="d-flex justify-content-center my-4 " v-if="films.length > 0">
         <nav aria-label="Page navigation">
           <ul class="pagination">
             <li class="page-item" :class="{ disabled: currPage <= 1 }">
@@ -29,7 +36,6 @@
         </nav>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -44,7 +50,8 @@ const route = useRoute();
 const requestStore = useRequestStore();
 const currPage = ref(1);
 const totalPages = ref(0);
-// Removed .value from the computed property
+const errorMessage = ref('');
+
 const films = computed(() => requestStore.searchedMovies);
 
 const updateSearchQuery = async () => {

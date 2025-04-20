@@ -1,36 +1,54 @@
-<template>  
-    <div class="card film-card col-xs-12 col-sm-6 col-md-3 offset-1 my-3" >
+<template>
+  <div>
+    
+    <div class="card film-card">
       <router-link :to="`/movie/${film.id}`">
-          <div class="card-img-container" >
-            <img :src="`https://image.tmdb.org/t/p/w500/${film.poster_path}`" :alt="film.title"  class="card-img-top" />
-          </div>
+        <div class="card-img-container">
+          <img :src="`https://image.tmdb.org/t/p/w500/${film.poster_path}`" :alt="film.title" class="card-img-top" />
+        </div>
       </router-link>
       <div class="card-body">
         <h3 class="card-title">{{ film.title }}</h3>
         <p class="card-text">{{ film.release_date }}</p>
-        <button @click="toggleWatchlist(film)" :class="{ 'in-watchlist': isInWatchlist(film.id) }">
-          {{ isInWatchlist(film.id) ? '❤️ In Watchlist' : '♡ Add to Watchlist' }}
+        <button @click="toggleWatchlist(film)" :class="{ 'in-watchlist': isInWatchlist(film.id) }"
+          v-if="isInWatchlist(film.id)">
+          <i class="fa-solid fa-heart"></i>In Watchlist
+        </button>
+        <button @click="toggleWatchlist(film)" :class="{ 'in-watchlist': isInWatchlist(film.id) }" v-else>
+          <i class="fa-regular fa-heart"></i>Add to Watchlist
         </button>
       </div>
     </div>
+  </div>
+
 </template>
 
 <script setup>
 import { ref, } from 'vue'
 import { useWatchlistStore } from '@/stores/watchlistStore'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router';
 const props = defineProps({
   film: {
     type: Object,
     required: true
   }
-})
+});
+const emit = defineEmits(['logFirst']);
 
 const watchlistStore = useWatchlistStore()
-
+const router = useRouter();
+const errorMessage = ref('');
 
 
 const toggleWatchlist = (film) => {
+  const userId = localStorage.getItem('loggedInUserId')
+  if (!userId) {
+    errorMessage.value = 'You need to be logged in to add a movie to your watchlist.  Redirecting to login page...';
+    emit('logFirst', errorMessage.value);
+    setTimeout(() => router.push('/login'), 3000);
+    
+  }
+
   if (isInWatchlist(film.id)) {
     watchlistStore.removeFromWatchlist(film.id)
   } else {
@@ -60,12 +78,10 @@ const isInWatchlist = (id) => {
   overflow: hidden;
   max-height: 300px;
   cursor: pointer;
+  width: 100%
 }
 
-.film-card img {
-  width: 100%;
-  object-fit: cover;
-}
+.film-card .card-img-container img {}
 
 .film-card h3 {
   margin: 1rem 1rem 0.5rem;

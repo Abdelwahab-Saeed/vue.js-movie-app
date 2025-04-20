@@ -7,6 +7,7 @@ import { storeToRefs } from 'pinia'
 import { computed, onMounted } from 'vue'
 import searchForm from './components/Search/SearchForm.vue';
 import { useRouter } from 'vue-router'
+import * as bootstrap from 'bootstrap';
 
 const watchlistStore = useWatchlistStore()
 const { watchlist } = storeToRefs(watchlistStore)

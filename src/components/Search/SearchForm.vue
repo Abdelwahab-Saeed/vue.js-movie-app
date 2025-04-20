@@ -10,12 +10,9 @@
 <script setup>
     import { RouterLink, RouterView } from 'vue-router';
     import { ref } from 'vue'
-    const inputValue = ref('')
-    const emit = defineEmits(['submit'])
+    const inputValue = ref('');
 
-    function sendQuery(targetQuery) {
-        emit('submit', targetQuery);
-    }
+   
 </script>
 
 <style scoped>

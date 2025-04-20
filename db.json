@@ -28,13 +28,11 @@
       ]
     },
     {
-      "id": "a7ef",
-      "name": "sayed",
-      "email": "sayed@gmail.com",
-      "password": "123456789",
-      "watchlist": [
-        324544
-      ]
+      "id": "a09a",
+      "name": "ali",
+      "email": "ali@gmail.com",
+      "password": "ali123456",
+      "watchlist": []
     }
   ],
   "comments": [
@@ -105,10 +103,22 @@
       "text": "good"
     },
     {
-      "id": "85c6",
+      "id": "9dea",
       "movieId": "1197306",
-      "userId": "3ee7",
-      "text": "hi there"
+      "userId": "a09a",
+      "text": "Fantastic"
+    },
+    {
+      "id": "ba5a",
+      "movieId": "854670",
+      "userId": null,
+      "text": "bad movie"
+    },
+    {
+      "id": "9c46",
+      "movieId": "324544",
+      "userId": "a09a",
+      "text": "hello"
     }
   ]
 }

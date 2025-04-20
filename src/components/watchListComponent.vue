@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div v-if="loading" class="loading-overlay">
       <div class="spinner-border text-light" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -10,10 +10,10 @@
       <div class="watchlist-header">
         <h1 class="watchlist-title">My Watchlist</h1>
       </div>
-
-      <div v-if="watchlist.length > 0" class="row watchlist-grid">
-        <CardComponent v-for="film in watchlist" :key="film.id" class="film-card" :film="film"
-          @remove-from-watchlist="removeFromWatchlist" />
+      <div v-if="watchlist.length > 0" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      <div class="col" v-for="film in watchlist" :key="film.id">
+        <cardComponent :film="film" @log-first="errorMessage = $event"/>
+      </div>      
       </div>
 
       <div v-else class="empty-state">
@@ -44,7 +44,7 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { useWatchlistStore } from '@/stores/watchlistStore'
-import CardComponent from '@/components/cardComponent.vue' // ✅ Import the actual card for watchlist
+import CardComponent from '@/components/cardComponent.vue';
 
 const loading = ref(false)
 const watchlistStore = useWatchlistStore()
@@ -78,7 +78,7 @@ const removeFromWatchlist = (id) => {
 }
 
 .watchlist-container {
-  padding: 2rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   min-height: 70vh;
 }
 
@@ -102,20 +102,20 @@ const removeFromWatchlist = (id) => {
   align-items: center;
   justify-content: center;
   padding: 3rem 1rem;
-  background: rgba(26, 26, 26, 0.5);
   border-radius: 12px;
-  max-width: 500px;
+  background-color: #1a1a1a;
+  max-width: 700px;
   margin: 0 auto;
 }
 
 .heart-container {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .heart-icon {
   position: relative;
-  font-size: 3rem;
-  color: #ff6b9d;
+  font-size: 15rem;
+  color: #FFE353;
   display: inline-block;
 }
 
@@ -125,7 +125,7 @@ const removeFromWatchlist = (id) => {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #ff6b9d;
+  background-color: #FFE353;
   transform: translateY(-50%);
 }
 
@@ -150,8 +150,8 @@ const removeFromWatchlist = (id) => {
   align-items: center;
   gap: 8px;
   padding: 0.75rem 1.5rem;
-  background: #ff6b9d;
-  color: white;
+  background: #FFE353;
+  color: black;
   border-radius: 50px;
   font-weight: 600;
   text-decoration: none;
@@ -159,7 +159,7 @@ const removeFromWatchlist = (id) => {
 }
 
 .discover-button:hover {
-  background: #ff4785;
+  background: #FFE353;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
 }
